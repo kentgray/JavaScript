@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>JavaScript</title>
+		
+		<script>
+		 //functions, once defined they can be used as many times as you want
+			 function sayHello(who) {
+				document.write("Hello,  " + who);
+			 }
+		</script>
+	</head>
+	<body>
+		<script>
+			//This combination concatenates the sentance
+			var words = "This is";
+			var morewords = " a sentence  ";
+			var sentence = words + morewords;
+			document.write(sentence);
+			
+			  document.write("<br>");document.write("<br>");
+			
+			 var num1 = 5;
+			 var num2 = 5;
+			 var num3 = 20;
+			 var total = ++num1 * (num2 + num3);
+			 document.write(total);
+			 //++ increments the variable;
+			 
+			  document.write("<br>");document.write("<br>");
+			 
+			 //strings are stored as object
+			 //this string will write out the result of the string 3=D, 5+F
+			 var alpha = "ABCDEFG";
+			 var result = alpha.substring(1, 5);
+			 document.write(result);
+			 
+			  document.write("<br>");document.write("<br>");
+			 
+			 //this string will write out the length of the string
+			 var length = alpha.length;
+			 document.write(length);
+			 
+			 		 
+			 //arrays are useful when you want to loop through alot of items and do the same thing to each one
+			 var a = new Array(7);
+			 a[0] = "cat";
+			 a[1] = "dog";
+			 a[2] = 95;
+			 a[3] = "     ";
+			 a[6] = true;
+			 
+			   document.write("<br>");document.write("<br>");
+			 
+			 var b = new Array("pickle", "pablo", 22, false);
+			 document.write(b[1]);
+			 document.write(a[3]);
+			 document.write(a[0]);
+			 document.write(a[3]);
+			 
+			 var c = ["dance", "laugh", "sing", 3, 5, false];
+			 document.write(c[1]);
+			 
+			  document.write("<br>");document.write("<br>");
+			  
+			 sayHello("Bob");
+			 document.write("<br>");
+			 sayHello("Mary");
+			 
+			 //flow control statements
+			 //if statements will only execute code if a particular condition is true
+			 var d = "jake";
+			 if (d == "Jake") {
+				 alert(d);
+			 } else {
+				 alert("The condition was false");
+			 }
+			 
+			 document.write("<br>"); document.write("<br>");
+			 
+			 
+			 //loops: the most useful one is a for loop, which will execute a block of code multiple times
+			 for (i=0;i<6;i++) {
+				 document.write("This is iteration " + i + "<br>");
+			 }
+			 
+			 
+			 //continue
+		</script>	
+	</body>
+<html>
