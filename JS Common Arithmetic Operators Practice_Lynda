@@ -1,5 +1,16 @@
 Common Arithematic Operators
 
+/*
+Add and Concatenate: +
+Subtract: -
+Multiply: *
+Divide: %
+counter += adds 1 to previous
+counter ++ adds 1 to previous
+counter 
+!== not equal to
+*/
+
 
 2 + 5
 7
