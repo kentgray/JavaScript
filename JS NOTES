@@ -20,3 +20,8 @@ Block Comments /*dfdfedfd
 AND Key = &&
 OR Key = ||
 
+AND's are always asked before the OR's in JS
+
+
+Objects are passed by a reference into a function
+Functions are all objects in JS.  They all inherit from a global function object spelled Function.
