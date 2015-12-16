@@ -1,0 +1,22 @@
+Javascript notes
+Sources
+	Mozilla developer network
+	Quirksmode.org
+	
+
+"="  are for assignments
+"===" are for comparisons
+
+arrays = a way of storing data to restore order
+arrays are objects that get special treatment in JS
+
+Comments:
+Line comments  // anything after that doesn't execute
+Block Comments /*dfdfedfd
+				dfddf
+				dfdfedfd
+				*/
+
+AND Key = &&
+OR Key = ||
+
