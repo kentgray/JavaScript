@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<!-- HTML Header Section Begins -->
+<html>
+<head>
+    <!-- The introductory information for the users -->
+    <input type="text" id="mytext">
+    <div class="a">Welcome to Planet Juranus!</div>
+    <div class="a">Save your spaceship from the asteroid field!!!</div>
+    <div class="a">Use the arrow keys to navigate!</div>
+
+<!–– MUSIC is loaded here in HTML -->
+<figure>
+        <figcaption>
+            <div class = "b">Listen to Music from Juranus</div>
+        </figcaption>
+    <audio
+        controls src = "gametheme.mp3">
+            <code>audio</code> 
+    </audio>
+        <figcaption>
+            <div class = "c">Music from the Planet's Colony</div>
+        </figcaption>
+    <audio
+        controls src = "lightgametheme.mp3">         
+            <code>audio</code> 
+    </audio>
+    <!–– Background Image -->
+    <body background = "Juranus.jpg">
+</figure>
+ <!-- HTML Header section ends here -->
+<style>
+/* HERE is where my CSS Begins.. */
+
+/* CSS for music players */
+figure {
+    position: absolute;
+    top: 170px;
+    left: 700px;
+}
+input {
+
+    text-indent: 5px;
+    font-size: 25px;
+    color: #000;
+    text-align: center;
+    left: 300px;
+}
+   
+
+    /* CSS for the main canvas */
+canvas {
+    position: absolute;
+    top: 200px;
+  /*  box-shadow: 0 9px #999; */
+    border:20px solid #FFFF00;
+    cursor: pointer;
+}
+/* CSS for the rules & directions */
+div.a {
+    text-indent: 10px;
+    font-size: 25px;
+    color: #FFFF00;
+    text-align: center;
+}
+/* CSS for Music Option 1 Text */
+div.b {
+    text-indent: 30px;
+    font-size: 20px;
+    color: #FFFF00; 
+    font-weight: bold;
+}
+/* CSS for Music Option 2 Text */
+div.c {
+    margin-top: 10px;
+    text-indent: 30px;
+    font-size: 20px;
+    color: #FFFF00;
+    text-align: justify;
+    font-weight: bold;
+}
+/* CSS for the button */
+.button {
+    position: absolute;
+    top: 120px;
+    left: 180px;
+    display: inline-block;
+    padding: 15px 25px;
+    width: 300px;
+    height: 70px;
+    font-size: 45px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #000000;
+    background-color: #FFFF00;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #000000;
+}
+/* Attempted to add CSS hover selector, but didn't work*/
+.button:hover {
+    background-color: #000000
+    color: #F5FFFA;
+}
+/* CSS for the Button when it's pressed */
+.button:active {
+    background-color: #000000;
+    color: #F5FFFA;
+    box-shadow: 0 9px #999;
+    outline: none;
+}
+/* The end of CSS */
+</style>
+ <!-- The end of the Head section in HTML-->
+</head>
+
+ <!-- The beginning of the Body Section in HTML which primarily consists of Javascript-->
+<body>
+<script>
+
+var Name = prompt("Please enter your name", "");
+Name = "Captain " + Name
+document.getElementById("mytext").value = Name;
+
+            // AND NOW THE JAVASCRIPT BEGINS
+var spaceshipX = 100;       // NUMBER Data Type
+var spaceshipHeight = 100;  // NUMBER Data Type
+var spaceshipSize = 30;   // NUMBER Data Type
+var spaceshipSpeed = 15;       // NUMBER Data Type
+var ObstacleList = [];      // OBJECT Data Type -- This is an array and Arrays are objects
+//var ObstacleSize = 25; // NUMBER Data Type
+var ObstacleSpeed = 5;      // NUMBER Data Type
+var score = 0;              // NUMBER Data Type
+   
+        // Attempted to add high score, but it did not work
+var highscore = 0;
+// This function loads the canvas
+window.onload = function() {
+    canvas = document.createElement("canvas");  // String Data Type
+    canvas.width = 640;                         // width is the property of the canvas
+    canvas.height = 480;                        // height is the property of the canvas
+    document.body.appendChild(canvas);
+    ctx = canvas.getContext("2d");              // String Data Type
+    setInterval(update, 1000/40);               // Update is the function, and the time interval is 1000 milliseconds (1 second)/ 40 milliseconds
+    setInterval(spawn, 2000);                   // Spawn is the function below that adds obstacles to the Obstacle list (object) every 2000 milliseconds (2 seconds)
+    document.addEventListener('keydown', keyPush);
+}
+    // Using the push() method to add new obstacles (elements) to the end of the array
+function spawn() {
+    ObstacleList.push({ x : canvas.width, 
+                        y : Math.random() * canvas.height});
+}
+
+        // This function fills in the canvas of where the game is played
+function update() {
+    ctx.fillStyle = "black";                             // Color of the Background
+    ctx.fillRect(0, 0, canvas.width, canvas.height);     // Dimensions of the canvas in a rectangular shape
+    ctx.fillStyle = "white";                             // Color of the object
+    ctx.fillRect(spaceshipX - spaceshipSize/2, spaceshipHeight - 
+      spaceshipSize/2, spaceshipSize, spaceshipSize);  // Dimensions of the canvas in a rectangular shape
+    ctx.fillStyle = "lime";                              // Color of the Scores
+    ctx.font = "24px Arial"                              // Font of the Scores 
+    ctx.fillText("Score: " + score,                      // This is where the Scores are displayed with the score variable,
+        canvas.width - 160, 20);                             //    .....which is always updated based on the number of Obstacles on the screen 
+    ctx.font = "22px Arial"
+    ctx.fillText("High Score: " + highscore,             //  This was my failed attempt at keeping a high score
+        canvas.width - 170, 40);
+
+    ctx.fillStyle = "red";
+
+    for(var obstacle = 0; obstacle < ObstacleList.length; obstacle ++) {  // For loop to iterate through the Obstacles List Object (Array)
+        ObstacleList[obstacle].x -= ObstacleSpeed;                       // Tells the Obstacles to travel from right to left across the screen (canvas)
+        score ++;                                                        // Increases the score for every obstacle that is added to the canvas     
+
+        ctx.fillRect(ObstacleList[obstacle].x - spaceshipSize/2,   // Sets the dimension of each obstacle
+            ObstacleList[obstacle].y - spaceshipSize/2,                // The x variable
+            spaceshipSize, spaceshipSize);          
+
+
+            // Determining the proximity of the obstacles to the Spaceship
+            // If the distance from the spaceship to the obstacle on the x and y coordinates are the same, then the spaceship has intersected with the obstacle
+        var distanceX = Math.abs(ObstacleList[obstacle].x - spaceshipX);
+        var distanceY = Math.abs(ObstacleList[obstacle].y - spaceshipHeight);
+        // Used to determine the radius of the rectangle
+        var totalDist = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+        // If statement to determine whether your ship is crashing with the obstacles
+        if(totalDist < spaceshipSize) {               
+            ObstacleList = [];          // Resets the Obstacle List to empty
+            spaceshipX = 100;            // Resets the X postion of the Spaceship
+            spaceshipHeight = 100;         // Resets the Y postion of the Spaceship
+            score = 0;
+            break;
+        }
+    }}
+
+    // Function for all the arrow keys (up, down, left, right)
+function keyPush(evt) {
+    switch(evt.keyCode) {
+        case 37:                        // left
+            spaceshipX -= spaceshipSpeed; 
+            break;
+        case 38:                        // up
+            spaceshipHeight -= spaceshipSpeed; 
+            break;
+        case 39:                        // right
+            spaceshipX += spaceshipSpeed; 
+            break;
+        case 40:                        // down
+            spaceshipHeight += spaceshipSpeed; 
+            break;
+    }
+}
+
+function evade(){
+    spaceshipX -= 70; 
+}
+
+</script>
+ <!-- JavaScript ends and HTML continues to display both the button and for the closing body and html tags-->
+ <button class="button" 
+    onmousedown="evade()"
+    onmouseup="evade()"
+    >EVADE!</button>  
+</body>
+</html>
